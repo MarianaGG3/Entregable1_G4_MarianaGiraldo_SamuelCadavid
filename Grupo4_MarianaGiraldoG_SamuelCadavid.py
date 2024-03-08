@@ -1,6 +1,6 @@
 class Protesiscadera:
     pass
-#prótesis de cadera, marcapasos cardíacos, stents coronarios, implantes dentales y prótesis de rodilla
+
 
 class Marcapasos:
     pass
