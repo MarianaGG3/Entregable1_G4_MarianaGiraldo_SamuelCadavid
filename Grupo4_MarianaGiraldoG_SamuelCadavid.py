@@ -3,7 +3,7 @@ import datetime
 class Implantes: #Clase padre de Implantes
 
     #constructor que inicializa la clase implantes
-    def __init__(self, medico, fecha, estado, cantidad ):
+    def __init__(self, medico, fecha, estado, cantidad, cedula ):
 
 
     #atributos privados   
@@ -11,7 +11,7 @@ class Implantes: #Clase padre de Implantes
         self.__medico=medico
         self.__estado=estado
         self.__cantidad=cantidad
-
+        self.__cedula=cedula
     #getters: permiten ver los objetos de la clase
 
         def verMedico(self):
@@ -25,6 +25,8 @@ class Implantes: #Clase padre de Implantes
         
         def verCantidad(self):
             return self.__cantidad
+        def vercedula(self):
+             return self.__cedula
 
         #setter: asignan los objetos
         def asignarMedico (self, medico):
@@ -38,11 +40,12 @@ class Implantes: #Clase padre de Implantes
         
         def asignarCantidad(self, cantidad):
             self.__cantidad=cantidad
-
+        def asignarCedula(self,cedula):
+             self.__cedula=cedula
 class Protesiscadera(Implantes):
-   def __init__(self,  medico, fecha, estado,cantidad, tipofij, tamano, material):
+   def __init__(self,  medico, fecha, estado,cantidad,cedula, tipofij, tamano, material):
     #constructor que llama los atributos de la clase padre
-        super().__init__(self, medico, fecha, estado, cantidad)
+        super().__init__(self, medico, fecha, estado, cantidad, cedula)
         #atributos privados
         self.__tipofij=tipofij
         self.__tamano=tamano
@@ -72,9 +75,9 @@ class Protesiscadera(Implantes):
         
 
 class Marcapasos(Implantes):
-    def __init__(self,  medico, fecha, estado, cantidad, frec, nelectrodos, alambrico):
+    def __init__(self,  medico, fecha, estado, cantidad,cedula, frec, nelectrodos, alambrico):
         #constructor que llama los atributos de la clase padre
-        super().__init__(self, medico, fecha, estado, cantidad)
+        super().__init__(self, medico, fecha, estado, cantidad,cedula)
         #atributos privados
         self.__frec=frec
         self.__nelectrodos=nelectrodos
@@ -103,9 +106,9 @@ class Marcapasos(Implantes):
     
 
 class Stents (Implantes):
-    def __init__(self,  medico, fecha, estado, cantidad, longitud, diametro, material):
+    def __init__(self,  medico, fecha, estado, cantidad,cedula, longitud, diametro, material):
         #constructor que llama los atributos de la clase padre
-        super().__init__(self,  medico, fecha, estado,cantidad)
+        super().__init__(self,  medico, fecha, estado,cantidad,cedula)
         #atributos privados
         self.__longitud=longitud
         self.__diametro=diametro
@@ -135,9 +138,9 @@ class Stents (Implantes):
             self.__material=material
 
 class ImplantesDentales(Implantes):
-    def __init__(self,  medico, fecha, estado, cantidad, forma, sistfij, material):
+    def __init__(self,  medico, fecha, estado, cantidad,cedula, forma, sistfij, material):
         #constructor que llama los atributos de la clase padre
-        super().__init__(self, medico, fecha, estado, cantidad)
+        super().__init__(self, medico, fecha, estado, cantidad,cedula)
         #atributos privados
         self.__forma=forma
         self.__sistfij=sistfij
@@ -166,9 +169,9 @@ class ImplantesDentales(Implantes):
             self.__material=material
 
 class ProtesisRodilla(Implantes):
-    def __init__(self,  medico, fecha,estado, cantidad, tipofij, tamano, material):
+    def __init__(self,  medico, fecha,estado, cantidad,cedula, tipofij, tamano, material):
         #constructor que llama los atributos de la clase padre
-        super().__init__(self,  medico, fecha, estado, cantidad)
+        super().__init__(self,  medico, fecha, estado, cantidad,cedula)
         #atributos privados
         self.__tipofij=tipofij
         self.__tamano=tamano
@@ -206,7 +209,18 @@ class Sistema():
     def verImplante(self):
         for i in self.__listaimplantes:
             pass
-
+    def nuevo_implante(self,cedula,nuevo_implante):
+         implante_encontrado= None
+         for i, cedula in enumerate(self.__listaimplantes):
+              if cedula in self.__listaimplantes:
+                   implante_encontrado=i
+                   break
+         if implante_encontrado is not None:
+              self.__listaimplantes[implante_encontrado]= nuevo_implante
+              print(f"implante con cedula {cedula} actualizada ")
+              print(implante_encontrado)
+         else:
+              print(f"No se encontro implante con cedula {cedula}")
 
 # def validar(msj):
 #     while True:
@@ -239,10 +253,11 @@ while True:
             fecha=input("ingrese fecha:  ")
             estado=input("ingrese estado del implante:")
             cantidad= input("ingrese cantidad:")
+            cedula=int(input("ingrese la cedula del paciente"))
             tipofij=input("ingrese tipo de fijacion:")
             tamano=input("ingrese tamaño:")
             material=input("ingrese material:")
-            pc=Protesiscadera(medico, fecha, estado,cantidad, tipofij, tamano, material)
+            pc=Protesiscadera(medico, fecha, estado,cantidad,cedula, tipofij, tamano, material)
             Sistema.agregarImplante(pc)
             
         elif tipoimp==2:
@@ -250,10 +265,11 @@ while True:
             fecha=input("ingrese fecha:  ")
             estado=input("ingrese estado del implante:")
             cantidad= input("ingrese cantidad:")
+            cedula=int(input("ingrese la cedula del paciente"))
             frec=("ingrese frecuencia de estimulacion: ")
             nelectrodos=("ingrese numero de electrodos: ")
             alambrico=("ingrese si es alambrico o inalambrico: ")
-            mp=Marcapasos(medico, fecha, estado, cantidad, frec, nelectrodos, alambrico)
+            mp=Marcapasos(medico, fecha, estado, cantidad,cedula, frec, nelectrodos, alambrico)
             Sistema.agregarImplante(mp)
 
         elif tipoimp==3:
@@ -261,29 +277,32 @@ while True:
             fecha=input("ingrese fecha:  ")
             estado=input("ingrese estado del implante:")
             cantidad= input("ingrese cantidad:")
+            cedula=int(input("ingrese la cedula del paciente"))
             longitud=("ingrese longitud :")
             diametro=("ingrese diametro:")
             material=("ingrese material:")
-            s=Stents(medico, fecha, estado, cantidad, longitud, diametro, material)
+            s=Stents(medico, fecha, estado, cantidad,cedula, longitud, diametro, material)
             Sistema.agregarImplante(s)
         elif tipoimp==4:
             medico=int(input("ingrese identificacion del medico responsable: "))
             fecha=input("ingrese fecha:  ")
             estado=input("ingrese estado del implante:")
             cantidad= input("ingrese cantidad:")
+            cedula=int(input("ingrese la cedula del paciente"))
             forma= input("ingrese forma: ")
             sistfij= input("ingrese sistema de fijacion: ")
             material= input("ingrese material: ")
-            id=ImplantesDentales(medico, fecha, estado, cantidad, forma, sistfij, material)
+            id=ImplantesDentales(medico, fecha, estado, cantidad, cedula, forma, sistfij, material)
         elif tipoimp==5:
             medico=int(input("ingrese identificacion del medico responsable: "))
             fecha=input("ingrese fecha:  ")
             estado=input("ingrese estado del implante:")
             cantidad= input("ingrese cantidad:")
+            cedula=int(input("ingrese la cedula del paciente"))
             tipofij=input("ingrese tipo de fijacion:")
             tamano=input("ingrese tamaño:")
             material=input("ingrese material:")
-            pr=ProtesisRodilla(medico, fecha, estado, cantidad, tipofij, tamano, material)
+            pr=ProtesisRodilla(medico, fecha, estado, cantidad, cedula, tipofij, tamano, material)
 
         
         else:
@@ -291,7 +310,69 @@ while True:
     elif menu==2:
         pass
     elif menu==3:
-        pass
+        cedula("ingrese la cedula del paciente con el implante a editar")
+        nuevo_implante=int(input("""ingrese el implante a ingresar:
+        1. protesis cadera
+        2. marcapasos
+        3. stents
+        4. implantes dentales
+        5. protesis rodilla
+        :  """))
+        if nuevo_implante==1:
+             medico=int(input("ingrese identificacion del medico responsable: "))
+             fecha=input("ingrese fecha:  ")
+             estado=input("ingrese estado del implante:")
+             cantidad= input("ingrese cantidad:")
+             tipofij=input("ingrese tipo de fijacion:")
+             tamano=input("ingrese tamaño:")
+             material=input("ingrese material:")
+             pc=Protesiscadera(medico, fecha, estado,cantidad, tipofij, tamano, material)
+             Sistema.nuevo_implante(pc,cedula)
+        elif nuevo_implante==2:
+             medico=int(input("ingrese identificacion del medico responsable: "))
+             fecha=input("ingrese fecha:  ")
+             estado=input("ingrese estado del implante:")
+             cantidad= input("ingrese cantidad:")
+             frec=("ingrese frecuencia de estimulacion: ")
+             nelectrodos=("ingrese numero de electrodos: ")
+             alambrico=("ingrese si es alambrico o inalambrico: ")
+             mp=Marcapasos(medico, fecha, estado, cantidad, frec, nelectrodos, alambrico)
+             Sistema.agregarImplante(mp,cedula)
+             
+        elif nuevo_implante==3:
+             medico=int(input("ingrese identificacion del medico responsable: "))
+             fecha=input("ingrese fecha:  ")
+             estado=input("ingrese estado del implante:")
+             cantidad= input("ingrese cantidad:")
+             longitud=("ingrese longitud :")
+             diametro=("ingrese diametro:")
+             material=("ingrese material:")
+             s=Stents(medico, fecha, estado, cantidad, longitud, diametro, material)
+             Sistema.nuevo_implante(s,cedula)
+
+        elif nuevo_implante==4:
+             medico=int(input("ingrese identificacion del medico responsable: "))
+             fecha=input("ingrese fecha:  ")
+             estado=input("ingrese estado del implante:")
+             cantidad= input("ingrese cantidad:")
+             forma= input("ingrese forma: ")
+             sistfij= input("ingrese sistema de fijacion: ")
+             material= input("ingrese material: ")
+             id=ImplantesDentales(medico, fecha, estado, cantidad, forma, sistfij, material)
+             Sistema.nuevo_implante(id,cedula)
+
+        elif nuevo_implante==5:
+             medico=int(input("ingrese identificacion del medico responsable: "))
+             fecha=input("ingrese fecha:  ")
+             estado=input("ingrese estado del implante:")
+             cantidad= input("ingrese cantidad:")
+             cedula=int(input("ingrese la cedula del paciente"))
+             tipofij=input("ingrese tipo de fijacion:")
+             tamano=input("ingrese tamaño:")
+             material=input("ingrese material:")
+             pr=ProtesisRodilla(medico, fecha, estado, cantidad, cedula, tipofij, tamano, material)
+             Sistema.nuevo_implante(pr,cedula)
+    
     elif menu==4:
         pass
     elif menu==5:
