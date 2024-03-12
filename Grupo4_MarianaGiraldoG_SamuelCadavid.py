@@ -42,7 +42,7 @@ class Implantes: #Clase padre de Implantes
 class Protesiscadera(Implantes):
    def __init__(self,  medico, fecha, estado,cantidad, tipofij, tamano, material):
     #constructor que llama los atributos de la clase padre
-        super().__init__(self, medico, fecha, estado, cantidad)
+        super().__init__(medico, fecha, estado, cantidad)
         #atributos privados
         self.__tipofij=tipofij
         self.__tamano=tamano
@@ -74,7 +74,7 @@ class Protesiscadera(Implantes):
 class Marcapasos(Implantes):
     def __init__(self,  medico, fecha, estado, cantidad, frec, nelectrodos, alambrico):
         #constructor que llama los atributos de la clase padre
-        super().__init__(self, medico, fecha, estado, cantidad)
+        super().__init__(medico, fecha, estado, cantidad)
         #atributos privados
         self.__frec=frec
         self.__nelectrodos=nelectrodos
@@ -105,7 +105,7 @@ class Marcapasos(Implantes):
 class Stents (Implantes):
     def __init__(self,  medico, fecha, estado, cantidad, longitud, diametro, material):
         #constructor que llama los atributos de la clase padre
-        super().__init__(self,  medico, fecha, estado,cantidad)
+        super().__init__(medico, fecha, estado,cantidad)
         #atributos privados
         self.__longitud=longitud
         self.__diametro=diametro
@@ -137,7 +137,7 @@ class Stents (Implantes):
 class ImplantesDentales(Implantes):
     def __init__(self,  medico, fecha, estado, cantidad, forma, sistfij, material):
         #constructor que llama los atributos de la clase padre
-        super().__init__(self, medico, fecha, estado, cantidad)
+        super().__init__(medico, fecha, estado, cantidad)
         #atributos privados
         self.__forma=forma
         self.__sistfij=sistfij
@@ -168,7 +168,7 @@ class ImplantesDentales(Implantes):
 class ProtesisRodilla(Implantes):
     def __init__(self,  medico, fecha,estado, cantidad, tipofij, tamano, material):
         #constructor que llama los atributos de la clase padre
-        super().__init__(self,  medico, fecha, estado, cantidad)
+        super().__init__( medico, fecha, estado, cantidad)
         #atributos privados
         self.__tipofij=tipofij
         self.__tamano=tamano
@@ -227,6 +227,7 @@ while True:
     """))
 
     if menu==1:
+        id_pac=int(input("ingrese el documento del paciente: "))
         tipoimp=int(input("""ingrese el implante a ingresar:
         1. protesis cadera
         2. marcapasos
