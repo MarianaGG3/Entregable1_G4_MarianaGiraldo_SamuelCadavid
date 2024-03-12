@@ -1,39 +1,48 @@
+import datetime
+
 class Implantes: #Clase padre de Implantes
 
     #constructor que inicializa la clase implantes
-    def __init__(self, precio, distribuidor, estado ):
+    def __init__(self, medico, fecha, estado, cantidad ):
 
 
     #atributos privados   
-        self.__precio=precio
-        self.__distribuidor=distribuidor
+        self.__fecha=fecha
+        self.__medico=medico
         self.__estado=estado
+        self.__cantidad=cantidad
 
-        #getters: permiten ver los objetos de la clase
+    #getters: permiten ver los objetos de la clase
 
-        def verPrecio(self):
-            return self.__precio
+        def verMedico(self):
+            return self.__medico
 
-        def verDistribuidor(self):
-            return self.__distribuidor
+        def verFecha(self):
+            return self.__fecha
         
         def verEstado(self):
             return self.__estado
         
-        #setter: asignan los objetos
-        def asignarPrecio (self, precio):
-            self.__precio= precio
+        def verCantidad(self):
+            return self.__cantidad
 
-        def asignarDistribuidor (self, distribuidor):
-            self.__distribuidor=distribuidor
+        #setter: asignan los objetos
+        def asignarMedico (self, medico):
+            self.__medico= medico
+
+        def asignarFecha (self, fecha):
+            self.__fecha=fecha
         
         def asignarEstado (self, estado):
             self.__estado=estado
+        
+        def asignarCantidad(self, cantidad):
+            self.__cantidad=cantidad
 
 class Protesiscadera(Implantes):
-   def __init__(self, precio, distribuidor, estado, tipofij, tamano, material):
+   def __init__(self,  medico, fecha, estado,cantidad, tipofij, tamano, material):
     #constructor que llama los atributos de la clase padre
-        super().__init__(self, precio, distribuidor, estado)
+        super().__init__(self, medico, fecha, estado, cantidad)
         #atributos privados
         self.__tipofij=tipofij
         self.__tamano=tamano
@@ -63,9 +72,9 @@ class Protesiscadera(Implantes):
         
 
 class Marcapasos(Implantes):
-    def __init__(self, precio, distribuidor, estado, frec, nelectrodos, alambrico):
+    def __init__(self,  medico, fecha, estado, cantidad, frec, nelectrodos, alambrico):
         #constructor que llama los atributos de la clase padre
-        super().__init__(self, precio, distribuidor, estado)
+        super().__init__(self, medico, fecha, estado, cantidad)
         #atributos privados
         self.__frec=frec
         self.__nelectrodos=nelectrodos
@@ -94,9 +103,9 @@ class Marcapasos(Implantes):
     
 
 class Stents (Implantes):
-    def __init__(self, precio, distribuidor, estado, longitud, diametro, material):
+    def __init__(self,  medico, fecha, estado, cantidad, longitud, diametro, material):
         #constructor que llama los atributos de la clase padre
-        super().__init__(self, precio, distribuidor, estado)
+        super().__init__(self,  medico, fecha, estado,cantidad)
         #atributos privados
         self.__longitud=longitud
         self.__diametro=diametro
@@ -126,9 +135,9 @@ class Stents (Implantes):
             self.__material=material
 
 class ImplantesDentales(Implantes):
-    def __init__(self, precio, distribuidor, estado, forma, sistfij, material):
+    def __init__(self,  medico, fecha, estado, cantidad, forma, sistfij, material):
         #constructor que llama los atributos de la clase padre
-        super().__init__(self, precio, distribuidor, estado)
+        super().__init__(self, medico, fecha, estado, cantidad)
         #atributos privados
         self.__forma=forma
         self.__sistfij=sistfij
@@ -157,9 +166,9 @@ class ImplantesDentales(Implantes):
             self.__material=material
 
 class ProtesisRodilla(Implantes):
-    def __init__(self, precio, distribuidor, estado, tipofij, tamano, material):
+    def __init__(self,  medico, fecha,estado, cantidad, tipofij, tamano, material):
         #constructor que llama los atributos de la clase padre
-        super().__init__(self, precio, distribuidor, estado)
+        super().__init__(self,  medico, fecha, estado, cantidad)
         #atributos privados
         self.__tipofij=tipofij
         self.__tamano=tamano
@@ -187,6 +196,16 @@ class ProtesisRodilla(Implantes):
     def asignarMaterial (self, material):
             self.__material=material
 
+class Sistema():
+    def __init__(self):
+        self.__listaimplantes=[]
+
+    def agregarImplante(self, implante):
+        self.__listaimplantes.append(implante)
+
+    def verImplante(self):
+        for i in self.__listaimplantes:
+            pass
 
 
 # def validar(msj):
@@ -208,7 +227,67 @@ while True:
     """))
 
     if menu==1:
-        pass
+        tipoimp=int(input("""ingrese el implante a ingresar:
+        1. protesis cadera
+        2. marcapasos
+        3. stents
+        4. implantes dentales
+        5. protesis rodilla
+        :  """))
+        if tipoimp==1:
+            medico=int(input("ingrese identificacion del medico responsable: "))
+            fecha=input("ingrese fecha:  ")
+            estado=input("ingrese estado del implante:")
+            cantidad= input("ingrese cantidad:")
+            tipofij=input("ingrese tipo de fijacion:")
+            tamano=input("ingrese tamaño:")
+            material=input("ingrese material:")
+            pc=Protesiscadera(medico, fecha, estado,cantidad, tipofij, tamano, material)
+            Sistema.agregarImplante(pc)
+            
+        elif tipoimp==2:
+            medico=int(input("ingrese identificacion del medico responsable: "))
+            fecha=input("ingrese fecha:  ")
+            estado=input("ingrese estado del implante:")
+            cantidad= input("ingrese cantidad:")
+            frec=("ingrese frecuencia de estimulacion: ")
+            nelectrodos=("ingrese numero de electrodos: ")
+            alambrico=("ingrese si es alambrico o inalambrico: ")
+            mp=Marcapasos(medico, fecha, estado, cantidad, frec, nelectrodos, alambrico)
+            Sistema.agregarImplante(mp)
+
+        elif tipoimp==3:
+            medico=int(input("ingrese identificacion del medico responsable: "))
+            fecha=input("ingrese fecha:  ")
+            estado=input("ingrese estado del implante:")
+            cantidad= input("ingrese cantidad:")
+            longitud=("ingrese longitud :")
+            diametro=("ingrese diametro:")
+            material=("ingrese material:")
+            s=Stents(medico, fecha, estado, cantidad, longitud, diametro, material)
+            Sistema.agregarImplante(s)
+        elif tipoimp==4:
+            medico=int(input("ingrese identificacion del medico responsable: "))
+            fecha=input("ingrese fecha:  ")
+            estado=input("ingrese estado del implante:")
+            cantidad= input("ingrese cantidad:")
+            forma= input("ingrese forma: ")
+            sistfij= input("ingrese sistema de fijacion: ")
+            material= input("ingrese material: ")
+            id=ImplantesDentales(medico, fecha, estado, cantidad, forma, sistfij, material)
+        elif tipoimp==5:
+            medico=int(input("ingrese identificacion del medico responsable: "))
+            fecha=input("ingrese fecha:  ")
+            estado=input("ingrese estado del implante:")
+            cantidad= input("ingrese cantidad:")
+            tipofij=input("ingrese tipo de fijacion:")
+            tamano=input("ingrese tamaño:")
+            material=input("ingrese material:")
+            pr=ProtesisRodilla(medico, fecha, estado, cantidad, tipofij, tamano, material)
+
+        
+        else:
+            continue
     elif menu==2:
         pass
     elif menu==3:
