@@ -1,6 +1,10 @@
 class Implantes: #Clase padre de Implantes
+
+    #constructor que inicializa la clase implantes
     def __init__(self, precio, distribuidor, estado ):
-        
+
+
+    #atributos privados   
         self.__precio=precio
         self.__distribuidor=distribuidor
         self.__estado=estado
@@ -28,7 +32,9 @@ class Implantes: #Clase padre de Implantes
 
 class Protesiscadera(Implantes):
    def __init__(self, precio, distribuidor, estado, tipofij, tamano, material):
+    #constructor que llama los atributos de la clase padre
         super().__init__(self, precio, distribuidor, estado)
+        #atributos privados
         self.__tipofij=tipofij
         self.__tamano=tamano
         self.__material=material
@@ -58,7 +64,9 @@ class Protesiscadera(Implantes):
 
 class Marcapasos(Implantes):
     def __init__(self, precio, distribuidor, estado, frec, nelectrodos, alambrico):
+        #constructor que llama los atributos de la clase padre
         super().__init__(self, precio, distribuidor, estado)
+        #atributos privados
         self.__frec=frec
         self.__nelectrodos=nelectrodos
         self.__alambrico=alambrico
@@ -87,7 +95,9 @@ class Marcapasos(Implantes):
 
 class Stents (Implantes):
     def __init__(self, precio, distribuidor, estado, longitud, diametro, material):
+        #constructor que llama los atributos de la clase padre
         super().__init__(self, precio, distribuidor, estado)
+        #atributos privados
         self.__longitud=longitud
         self.__diametro=diametro
         self.__material=material
@@ -117,7 +127,9 @@ class Stents (Implantes):
 
 class ImplantesDentales(Implantes):
     def __init__(self, precio, distribuidor, estado, forma, sistfij, material):
+        #constructor que llama los atributos de la clase padre
         super().__init__(self, precio, distribuidor, estado)
+        #atributos privados
         self.__forma=forma
         self.__sistfij=sistfij
         self.__material= material
@@ -146,7 +158,9 @@ class ImplantesDentales(Implantes):
 
 class ProtesisRodilla(Implantes):
     def __init__(self, precio, distribuidor, estado, tipofij, tamano, material):
+        #constructor que llama los atributos de la clase padre
         super().__init__(self, precio, distribuidor, estado)
+        #atributos privados
         self.__tipofij=tipofij
         self.__tamano=tamano
         self.__material=material
