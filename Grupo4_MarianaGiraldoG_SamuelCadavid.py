@@ -214,9 +214,14 @@ class Sistema():
         else:
             print("Índice de implante no válido.")
 
-    def verImplante(self):
-        for i in self.__listaimplantes:
-            pass
+    def ver_implante(self):
+        if not self.implantes:
+            print("No hay implantes registrados.")
+            return
+        for i, implante in enumerate(self.implantes, 1):
+            print(f"implante #{i}:")
+            print(implante)
+            print("-" * 40)
     def actualizar_implante(self, indice, implante_actualizado):
         if indice >= 0 and indice < len(self.implantes):
             self.implantes[indice] = implante_actualizado
@@ -384,7 +389,7 @@ while True:
             sistema.actualizar_implante(indice,pr)
     
     elif menu==4:
-        pass
+        sistema.ver_implante()
     elif menu==5:
         break
 
