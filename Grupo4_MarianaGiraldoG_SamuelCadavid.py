@@ -201,10 +201,18 @@ class ProtesisRodilla(Implantes):
 
 class Sistema():
     def __init__(self):
-        self.__listaimplantes=[]
+        self.listaimplantes=[]
 
     def agregarImplante(self, implante):
-        self.__listaimplantes.append(implante)
+        self.listaimplantes.append(implante)
+
+    def eliminar_implante(self, indice):
+        if indice >= 0 and indice < len(self.implantes):
+            implante_eliminado = self.implantes.pop(indice)
+            print(f"Implante #{indice + 1} eliminado:")
+            print(implante_eliminado)
+        else:
+            print("Índice de implante no válido.")
 
     def verImplante(self):
         for i in self.__listaimplantes:
@@ -311,7 +319,8 @@ while True:
         else:
             continue
     elif menu==2:
-        pass
+          ti = int(input("ingrese indice de implante a eliminar tomando el cero como posición 1"))
+          sistema.eliminar_implante(ti)
     elif menu==3:
         cedula("ingrese la cedula del paciente con el implante a editar")
         nuevo_implante=int(input("""ingrese el implante a ingresar:
