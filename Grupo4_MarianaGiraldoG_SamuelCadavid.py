@@ -217,18 +217,13 @@ class Sistema():
     def verImplante(self):
         for i in self.__listaimplantes:
             pass
-    def nuevo_implante(self,cedula,nuevo_implante):
-         implante_encontrado= None
-         for i, cedula in enumerate(self.__listaimplantes):
-              if cedula in self.__listaimplantes:
-                   implante_encontrado=i
-                   break
-         if implante_encontrado is not None:
-              self.__listaimplantes[implante_encontrado]= nuevo_implante
-              print(f"implante con cedula {cedula} actualizada ")
-              print(implante_encontrado)
-         else:
-              print(f"No se encontro implante con cedula {cedula}")
+    def actualizar_implante(self, indice, implante_actualizado):
+        if indice >= 0 and indice < len(self.implantes):
+            self.implantes[indice] = implante_actualizado
+            print(f"implante #{indice + 1} actualizada:")
+            print(implante_actualizado)
+        else:
+            print("Índice de implante no válido.")
 
 # def validar(msj):
 #     while True:
@@ -250,7 +245,6 @@ while True:
     """))
 
     if menu==1:
-        id_pac=int(input("ingrese el documento del paciente: "))
         tipoimp=int(input("""ingrese el implante a ingresar:
         1. protesis cadera
         2. marcapasos
@@ -322,68 +316,72 @@ while True:
           ti = int(input("ingrese indice de implante a eliminar tomando el cero como posición 1"))
           sistema.eliminar_implante(ti)
     elif menu==3:
-        cedula("ingrese la cedula del paciente con el implante a editar")
-        nuevo_implante=int(input("""ingrese el implante a ingresar:
+        indice=int(input("ingrese indice de implante a modificar tomando el cero como posición 1: "))
+        nuevo_implante = int(input("""ingrese el implante a ingresar:
         1. protesis cadera
         2. marcapasos
         3. stents
         4. implantes dentales
         5. protesis rodilla
         :  """))
-        if nuevo_implante==1:
-             medico=int(input("ingrese identificacion del medico responsable: "))
-             fecha=input("ingrese fecha:  ")
-             estado=input("ingrese estado del implante:")
-             cantidad= input("ingrese cantidad:")
-             tipofij=input("ingrese tipo de fijacion:")
-             tamano=input("ingrese tamaño:")
-             material=input("ingrese material:")
-             pc=Protesiscadera(medico, fecha, estado,cantidad, tipofij, tamano, material)
-             sistema.nuevo_implante(pc,cedula)
-        elif nuevo_implante==2:
-             medico=int(input("ingrese identificacion del medico responsable: "))
-             fecha=input("ingrese fecha:  ")
-             estado=input("ingrese estado del implante:")
-             cantidad= input("ingrese cantidad:")
-             frec=("ingrese frecuencia de estimulacion: ")
-             nelectrodos=("ingrese numero de electrodos: ")
-             alambrico=("ingrese si es alambrico o inalambrico: ")
-             mp=Marcapasos(medico, fecha, estado, cantidad, frec, nelectrodos, alambrico)
-             sistema.agregarImplante(mp,cedula)
-             
-        elif nuevo_implante==3:
-             medico=int(input("ingrese identificacion del medico responsable: "))
-             fecha=input("ingrese fecha:  ")
-             estado=input("ingrese estado del implante:")
-             cantidad= input("ingrese cantidad:")
-             longitud=("ingrese longitud :")
-             diametro=("ingrese diametro:")
-             material=("ingrese material:")
-             s=Stents(medico, fecha, estado, cantidad, longitud, diametro, material)
-             sistema.nuevo_implante(s,cedula)
+        if nuevo_implante == 1:
+            medico = int(input("ingrese identificacion del medico responsable: "))
+            fecha = input("ingrese fecha:  ")
+            estado = input("ingrese estado del implante:")
+            cantidad = input("ingrese cantidad:")
+            cedula = input('ingrese la cedula del paciente')
+            tipofij = input("ingrese tipo de fijacion:")
+            tamano = input("ingrese tamaño:")
+            material = input("ingrese material:")
+            pc = Protesiscadera(medico, fecha, estado, cantidad,cedula, tipofij, tamano, material)
+            sistema.actualizar_implante(indice,pc )
+        elif nuevo_implante == 2:
+            medico = int(input("ingrese identificacion del medico responsable: "))
+            fecha = input("ingrese fecha:  ")
+            estado = input("ingrese estado del implante:")
+            cantidad = input("ingrese cantidad:")
+            cedula = input('ingrese la cedula del paciente')
+            frec = input("ingrese frecuencia de estimulacion: ")
+            nelectrodos = input("ingrese numero de electrodos: ")
+            alambrico = input("ingrese si es alambrico o inalambrico: ")
+            mp = Marcapasos(medico, fecha, estado, cantidad, cedula, frec, nelectrodos, alambrico)
+            sistema.actualizar_implante(indice,mp )
 
-        elif nuevo_implante==4:
-             medico=int(input("ingrese identificacion del medico responsable: "))
-             fecha=input("ingrese fecha:  ")
-             estado=input("ingrese estado del implante:")
-             cantidad= input("ingrese cantidad:")
-             forma= input("ingrese forma: ")
-             sistfij= input("ingrese sistema de fijacion: ")
-             material= input("ingrese material: ")
-             id=ImplantesDentales(medico, fecha, estado, cantidad, forma, sistfij, material)
-             sistema.nuevo_implante(id,cedula)
+        elif nuevo_implante == 3:
+            medico = int(input("ingrese identificacion del medico responsable: "))
+            fecha = input("ingrese fecha:  ")
+            estado = input("ingrese estado del implante:")
+            cantidad = input("ingrese cantidad:")
+            cedula = input('ingrese la cedula del paciente')
+            longitud = input("ingrese longitud :")
+            diametro = input("ingrese diametro:")
+            material = input("ingrese material:")
+            s = Stents(medico, fecha, estado, cantidad, cedula, longitud, diametro, material)
+            sistema.actualizar_implante(indice,s)
 
-        elif nuevo_implante==5:
-             medico=int(input("ingrese identificacion del medico responsable: "))
-             fecha=input("ingrese fecha:  ")
-             estado=input("ingrese estado del implante:")
-             cantidad= input("ingrese cantidad:")
-             cedula=int(input("ingrese la cedula del paciente"))
-             tipofij=input("ingrese tipo de fijacion:")
-             tamano=input("ingrese tamaño:")
-             material=input("ingrese material:")
-             pr=ProtesisRodilla(medico, fecha, estado, cantidad, cedula, tipofij, tamano, material)
-             sistema.nuevo_implante(pr,cedula)
+        elif nuevo_implante == 4:
+            medico = int(input("ingrese identificacion del medico responsable: "))
+            fecha = input("ingrese fecha:  ")
+            estado = input("ingrese estado del implante:")
+            cantidad = input("ingrese cantidad:")
+            cedula = input('ingrese la cedula del paciente')
+            forma = input("ingrese forma: ")
+            sistfij = input("ingrese sistema de fijacion: ")
+            material = input("ingrese material: ")
+            id = ImplantesDentales(medico, fecha, estado, cantidad,cedula, forma, sistfij, material)
+            sistema.actualizar_implante(indice,id)
+
+        elif nuevo_implante == 5:
+            medico = int(input("ingrese identificacion del medico responsable: "))
+            fecha = input("ingrese fecha:  ")
+            estado = input("ingrese estado del implante:")
+            cantidad = input("ingrese cantidad:")
+            cedula = int(input("ingrese la cedula del paciente"))
+            tipofij = input("ingrese tipo de fijacion:")
+            tamano = input("ingrese tamaño:")
+            material = input("ingrese material:")
+            pr = ProtesisRodilla(medico, fecha, estado, cantidad, cedula, tipofij, tamano, material)
+            sistema.actualizar_implante(indice,pr)
     
     elif menu==4:
         pass
